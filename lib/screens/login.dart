@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_learning/screens/homescreen.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,9 @@ class _LoginState extends State<Login> {
                 email: emailcontoroller.text,
                 password: passwordcontoroller.text);
         errormessage = '';
+        
+
+
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
           errormessage = e.message!;
@@ -161,17 +165,17 @@ class _LoginState extends State<Login> {
     );
   }
 
-  String? emailvalidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return "email address is required";
+    String? emailvalidator(String? value) {
+      if (value == null || value.isEmpty) {
+        return "email address is required";
+      }
+      String pattern = r'\w+@\w+\.\w+';
+      RegExp regex = RegExp(pattern);
+      if (!regex.hasMatch(value)) {
+        return "invalied e-mail addrss format";
+      }
+      return null;
     }
-    String pattern = r'\w+@\w+\.\w+';
-    RegExp regex = RegExp(pattern);
-    if (!regex.hasMatch(value)) {
-      return "invalied e-mail addrss format";
-    }
-    return null;
-  }
 
   String? passwordvalidator(String? value) {
     if (value == null || value.isEmpty) {

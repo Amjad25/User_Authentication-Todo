@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
     await FirebaseFirestore.instance
         .collection('tasks')
         .doc(auth.currentUser!.uid)
-        .collection('todo')
+        .collection('todo') 
         .add({
       'task': todoTextController.text,
       'date':
@@ -153,7 +153,8 @@ class _HomeState extends State<Home> {
                   return Center(
                     child: Text("No Data"),
                   );
-                }),
+                }
+                ),
           )
 
           // ListTile(
